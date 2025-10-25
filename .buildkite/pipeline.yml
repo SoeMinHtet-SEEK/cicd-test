@@ -1,15 +1,17 @@
 steps:
   - label: ":android: Build Debug APK"
     key: "build-apk"
-    command: "./gradlew assembleDebug"
-    artifact_paths: "app/build/outputs/apk/debug/app-debug.apk"
+    command: |
+      ./gradlew assembleDebug
+      cp app/build/outputs/apk/debug/app-debug.apk app-debug.apk
+    artifact_paths: "app-debug.apk"
     agents:
       queue: local
       
   - label: ":package: Upload APK Info"
     command: |
-      echo "✅ APK build complete!"
-      ls -lh app/build/outputs/apk/debug/
+      buildkite-agent artifact download "app-debug.apk" .
+      ls -lh app-debug.apk
     depends_on: "build-apk"
     agents:
       queue: local
