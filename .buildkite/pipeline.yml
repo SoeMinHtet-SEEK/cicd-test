@@ -11,3 +11,5 @@ steps:
       ls -lh app/build/outputs/apk/debug/
     depends_on: 
       - step: 0
+    agents:
+      queue: local
