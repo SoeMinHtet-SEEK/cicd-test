@@ -1,5 +1,6 @@
 steps:
   - label: ":android: Build Debug APK"
+    key: "build-apk"
     command: "./gradlew assembleDebug"
     artifact_paths: "app/build/outputs/apk/debug/app-debug.apk"
     agents:
@@ -9,7 +10,6 @@ steps:
     command: |
       echo "✅ APK build complete!"
       ls -lh app/build/outputs/apk/debug/
-    depends_on: 
-      - step: 0
+    depends_on: "build-apk"
     agents:
       queue: local
