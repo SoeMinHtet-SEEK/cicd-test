@@ -1,5 +1,12 @@
 steps:
-  - label: ":hammer: Test Build Script"
-    command: "./build.sh"
+  - label: ":android: Build Debug APK"
+    command: "./gradlew assembleDebug"
+    artifact_paths: "app/build/outputs/apk/debug/app-debug.apk"
     agents:
       queue: local
+
+  - label: ":package: Upload APK Info"
+    command: |
+      echo "✅ APK build complete!"
+      ls -lh app/build/outputs/apk/debug/
+    depends_on: ~
