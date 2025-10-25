@@ -1,0 +1,5 @@
+steps:
+  - label: ":hammer: Test Build Script"
+    command: "./build.sh"
+    agents:
+      queue: local
